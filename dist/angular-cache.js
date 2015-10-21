@@ -280,13 +280,17 @@ return /******/ (function(modules) { // webpackBootstrap
 		    $$id: cacheId,
 
 		    destroy: function destroy() {
-		      clearInterval(this.$$cacheFlushIntervalId);
-		      clearInterval(this.$$recycleFreqId);
 		      this.removeAll();
 		      if ($$storage) {
 		        $$storage().removeItem(this.$$prefix + '.keys');
 		        $$storage().removeItem(this.$$prefix);
 		      }
+		      this.dispose();
+		    },
+
+		    dispose: function dispose() {
+		      clearInterval(this.$$cacheFlushIntervalId);
+		      clearInterval(this.$$recycleFreqId);
 		      $$storage = null;
 		      $$data = null;
 		      $$lruHeap = null;
@@ -1036,6 +1040,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		CacheFactory.destroy = function (cacheId) {
 		  if (caches[cacheId]) {
 		    caches[cacheId].destroy();
+		    delete caches[cacheId];
+		  }
+		};
+
+		CacheFactory.dispose = function (cacheId) {
+		  if (caches[cacheId]) {
+		    caches[cacheId].dispose();
 		    delete caches[cacheId];
 		  }
 		};

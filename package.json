@@ -54,6 +54,6 @@
     "angular": ">=1.x"
   },
   "dependencies": {
-    "cachefactory": "1.2.0"
+    "cachefactory": "ccrowhurstram/CacheFactory#feat-cache-dispose"
   }
 }
